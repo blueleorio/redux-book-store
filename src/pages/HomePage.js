@@ -37,7 +37,7 @@ const HomePage = () => {
 
   useEffect(() => {
     dispatch(fetchData({ pageNum, limit: 20, query }));
-    console.log("qury", query);
+    // console.log("qury", query);
   }, [dispatch, pageNum, limit, query]);
 
   //--------------form
