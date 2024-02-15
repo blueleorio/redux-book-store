@@ -3,7 +3,6 @@ import { ClipLoader } from "react-spinners";
 import { useNavigate } from "react-router-dom";
 import PaginationBar from "../components/PaginationBar";
 import SearchForm from "../components/SearchForm";
-//import api from "../apiService";
 import { FormProvider } from "../form";
 import { useForm } from "react-hook-form";
 import {
@@ -17,8 +16,8 @@ import {
   Typography,
   CardContent,
 } from "@mui/material";
+import { fetchData } from "../components/book/bookSlice.js";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchData } from "../components/book/bookSlice"; // Fetch 1 time to fetch all books, useEffect
 
 const BACKEND_API = process.env.REACT_APP_BACKEND_API;
 
@@ -26,12 +25,10 @@ const HomePage = () => {
   const dispatch = useDispatch();
   const status = useSelector((state) => state.book.status);
   const books = useSelector((state) => state.book.books);
-
   const [pageNum, setPageNum] = useState(1);
+  const [query, setQuery] = useState("");
   const totalPage = 10;
   const limit = 10;
-
-  const [query, setQuery] = useState("");
 
   const navigate = useNavigate();
   const handleClickBook = (bookId) => {
@@ -40,7 +37,9 @@ const HomePage = () => {
 
   useEffect(() => {
     dispatch(fetchData({ pageNum, limit: 20, query }));
+    console.log("qury", query);
   }, [dispatch, pageNum, limit, query]);
+
   //--------------form
   const defaultValues = {
     searchQuery: "",
@@ -52,13 +51,15 @@ const HomePage = () => {
   const onSubmit = (data) => {
     setQuery(data.searchQuery);
   };
+  //----------------
+
   return (
     <Container>
       <Stack sx={{ display: "flex", alignItems: "center", m: "2rem" }}>
         <Typography variant="h3" sx={{ textAlign: "center" }}>
           Book Store
         </Typography>
-        {status && <Alert severity="danger">{status}</Alert>}
+        {status && <Alert severity="error">{status}</Alert>}
         <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
           <Stack
             spacing={2}
@@ -88,7 +89,7 @@ const HomePage = () => {
             justifyContent="space-around"
             flexWrap="wrap"
           >
-            {books.map((book) => (
+            {books?.map((book) => (
               <Card
                 key={book.id}
                 onClick={() => handleClickBook(book.id)}

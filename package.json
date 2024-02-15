@@ -3,11 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@emotion/react": "^11.11.3",
-    "@emotion/styled": "^11.11.0",
+    "@emotion/react": "^11.8.2",
+    "@emotion/styled": "^11.8.1",
     "@mui/icons-material": "^5.5.1",
-    "@mui/material": "^5.15.10",
-    "@reduxjs/toolkit": "^2.1.0",
+    "@mui/material": "^5.5.2",
+    "@reduxjs/toolkit": "^1.8.2",
     "@testing-library/jest-dom": "^5.11.6",
     "@testing-library/react": "^11.2.2",
     "@testing-library/user-event": "^12.5.0",
@@ -15,7 +15,7 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-hook-form": "^7.28.1",
-    "react-redux": "^7.2.9",
+    "react-redux": "^7.2.6",
     "react-router-dom": "^6.2.2",
     "react-scripts": "^5.0.0",
     "react-spinners": "^0.11.0",
@@ -25,7 +25,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "dev": "json-server --watch ./server/db.json --port 4000 --static ./server/public",
+    "dev": "json-server --watch ./server/db.json --port 5000 --static ./server/public",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",

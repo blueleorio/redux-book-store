@@ -12,9 +12,6 @@ import {
 } from "@mui/material";
 import { ClipLoader } from "react-spinners";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
-import api from "../apiService";
-
 import { useDispatch, useSelector } from "react-redux";
 import {
   fetchReadingList,
@@ -23,17 +20,16 @@ import {
 const BACKEND_API = process.env.REACT_APP_BACKEND_API;
 
 const ReadingPage = () => {
-  const dispatch = useDispatch();
-  const status = useSelector((state) => state.book.status);
-  const readingList = useSelector((state) => state.book.readingList);
-  const navigate = useNavigate();
   const [removedBookId, setRemovedBookId] = useState("");
+  const readingList = useSelector((state) => state.book.readingList);
+  const status = useSelector((state) => state.book.status);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleClickBook = (bookId) => {
     navigate(`/books/${bookId}`);
   };
-
-  const removeBook = (bookId) => {
+  const chooseBook = (bookId) => {
     setRemovedBookId(bookId);
   };
 
@@ -47,6 +43,7 @@ const ReadingPage = () => {
     dispatch(removeFromReadingList(removedBookId));
     setRemovedBookId("");
   }, [dispatch, removedBookId]);
+  console.log(readingList);
 
   return (
     <Container>
@@ -80,7 +77,7 @@ const ReadingPage = () => {
                   alt={`${book.title}`}
                   onClick={() => handleClickBook(book.id)}
                 />
-                <CardContent>
+                <CardContent component="div">
                   <Typography gutterBottom variant="h5" component="div">
                     {`${book.title}`}
                   </Typography>
@@ -98,7 +95,7 @@ const ReadingPage = () => {
                       minWidth: "1.5rem",
                     }}
                     size="small"
-                    onClick={() => removeBook(book.id)}
+                    onClick={() => chooseBook(book.id)}
                   >
                     &times;
                   </Button>

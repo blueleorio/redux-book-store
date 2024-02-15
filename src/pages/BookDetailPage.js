@@ -1,11 +1,12 @@
 import React, { useEffect } from "react";
 import { ClipLoader } from "react-spinners";
 import { useParams } from "react-router-dom";
-// import { toast } from "react-toastify";
-// import api from "../apiService";
 import { Container, Button, Box, Grid, Stack, Typography } from "@mui/material";
+import {
+  addToReadingList,
+  getBookDetail,
+} from "../components/book/bookSlice.js";
 import { useDispatch, useSelector } from "react-redux";
-import { addToReadingList, getBookDetail } from "../components/book/bookSlice";
 
 const BACKEND_API = process.env.REACT_APP_BACKEND_API;
 
@@ -66,10 +67,9 @@ const BookDetailPage = () => {
                 <Button
                   variant="outlined"
                   sx={{ width: "fit-content" }}
+                  children={"Add to Reading List"}
                   onClick={() => dispatch(addToReadingList(bookDetail))}
-                >
-                  Add to Reading List
-                </Button>
+                />
               </Stack>
             )}
           </Grid>
